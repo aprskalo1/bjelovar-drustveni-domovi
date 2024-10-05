@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BddAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6429b8db922af92040dad92d94e1a68ce57bd8d")]
 [assembly: System.Reflection.AssemblyProductAttribute("BddAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BddAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
