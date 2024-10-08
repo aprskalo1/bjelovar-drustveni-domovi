@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BddAPI.Data;
 
-public class BddDbContext : DbContext
+public class BddDbContext(DbContextOptions<BddDbContext> options) : DbContext(options)
 {
-    public DbSet<User> Users { get; set; }
+    public DbSet<User> Users { get; init; }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
