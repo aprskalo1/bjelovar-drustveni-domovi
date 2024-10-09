@@ -46,5 +46,4 @@ app.UseWhen(context => !context.Request.Path.StartsWithSegments("/api"), appBuil
     });
 });
 
-
 app.Run();

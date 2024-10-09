@@ -1,8 +1,9 @@
+// dotnet ef database update
+
 using BddAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BddAPI.Data;
-
 public class BddDbContext(DbContextOptions<BddDbContext> options) : DbContext(options)
 {
     public DbSet<User> Users { get; init; }
