@@ -40,7 +40,7 @@ app.UseSpa(spa =>
 {
     if (app.Environment.IsDevelopment())
     {
-        spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+        spa.UseProxyToSpaDevelopmentServer("http://localhost:5173");
     }
 });
 
