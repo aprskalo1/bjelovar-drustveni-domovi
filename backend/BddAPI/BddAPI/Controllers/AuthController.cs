@@ -8,7 +8,7 @@ namespace BddAPI.Controllers;
 [Route("api/[controller]")]
 public class AuthController(IAuthService authService) : ControllerBase
 {
-    [HttpPost("Register")]
+    [HttpPost("register")]
     public async Task<IActionResult> Register(UserRequestDto userRequestDto)
     {
         var userResponseDto = await authService.RegisterAsync(userRequestDto);

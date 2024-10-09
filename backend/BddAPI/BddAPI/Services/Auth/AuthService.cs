@@ -1,6 +1,7 @@
 using AutoMapper;
 using BddAPI.DTOs.Request;
 using BddAPI.DTOs.Response;
+using BddAPI.Exceptions;
 using BddAPI.Models;
 using BddAPI.Repositories;
 
@@ -18,7 +19,7 @@ public class AuthService(IUserRepository userRepository, IMapper mapper) : IAuth
         var existingUser = await userRepository.GetUserByUsernameAsync(userRequestDto.Username);
 
         if (existingUser != null)
-            throw new Exception("User already exists");
+            throw new UserException("User already exists");
 
         var user = mapper.Map<User>(userRequestDto);
         await userRepository.CreateUserAsync(user);
