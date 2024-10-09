@@ -28,20 +28,12 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    // app.UseCors("AllowAll");
+    app.UseCors("AllowAll");
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 app.MapControllers();
-
-app.UseSpa(spa =>
-{
-    if (app.Environment.IsDevelopment())
-    {
-        spa.UseProxyToSpaDevelopmentServer("http://localhost:5173");
-    }
-});
 
 app.Run();
