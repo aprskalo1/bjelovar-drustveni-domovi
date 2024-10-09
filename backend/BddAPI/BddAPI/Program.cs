@@ -28,7 +28,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseCors("AllowAll");
+    // app.UseCors("AllowAll");
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -36,14 +36,12 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapControllers();
 
-app.UseWhen(context => !context.Request.Path.StartsWithSegments("/api"), appBuilder =>
+app.UseSpa(spa =>
 {
-    appBuilder.UseSpa(spa =>
+    if (app.Environment.IsDevelopment())
     {
-        if (!app.Environment.IsDevelopment()) return;
-        spa.Options.SourcePath = "ClientApp";
         spa.UseProxyToSpaDevelopmentServer("http://localhost:5173");
-    });
+    }
 });
 
 app.Run();
