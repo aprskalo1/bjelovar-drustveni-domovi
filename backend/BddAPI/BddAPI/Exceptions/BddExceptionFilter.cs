@@ -3,17 +3,20 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace BddAPI.Exceptions;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public class BddExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {
-        if (context.Exception is not BddCustomException bddCustomException) return;
+        if (context.Exception is not BddCustomException netLinkCustomException) return;
         context.Result = context.Exception switch
         {
-            BddCustomException => new BadRequestObjectResult(new
+            UserException => new BadRequestObjectResult(new
             {
-                bddCustomException.Message
+                netLinkCustomException.Message
             }),
+            NotFoundException => new NotFoundObjectResult(new { netLinkCustomException.Message }),
+            UnauthorizedException => new UnauthorizedObjectResult(new { netLinkCustomException.Message }),
             _ => context.Result
         };
 

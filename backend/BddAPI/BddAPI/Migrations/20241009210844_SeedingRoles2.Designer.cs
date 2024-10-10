@@ -4,6 +4,7 @@ using BddAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BddAPI.Migrations
 {
     [DbContext(typeof(BddDbContext))]
-    partial class BddDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241009210844_SeedingRoles2")]
+    partial class SeedingRoles2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,33 +57,6 @@ namespace BddAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CommunityCenters");
-                });
-
-            modelBuilder.Entity("BddAPI.Models.RefreshToken", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Expires")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("BddAPI.Models.Reservation", b =>
@@ -143,13 +119,13 @@ namespace BddAPI.Migrations
                         new
                         {
                             Id = new Guid("7a64bde5-8705-4ad5-8d69-1aadd2108a89"),
-                            Description = "Superuser role with full access",
+                            Description = "Administrator role with full access",
                             Name = "Superuser"
                         },
                         new
                         {
                             Id = new Guid("c9b1f6c4-dce5-4b26-88b1-29b9b29f5d2b"),
-                            Description = "Administrator role with access to most of the features",
+                            Description = "Administrator role with full access",
                             Name = "Admin"
                         },
                         new
@@ -242,17 +218,6 @@ namespace BddAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
-                });
-
-            modelBuilder.Entity("BddAPI.Models.RefreshToken", b =>
-                {
-                    b.HasOne("BddAPI.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BddAPI.Models.Reservation", b =>
