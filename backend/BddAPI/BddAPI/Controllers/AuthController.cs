@@ -1,4 +1,3 @@
-using BddAPI.DTOs.Request;
 using BddAPI.Services.Auth;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,12 +5,19 @@ namespace BddAPI.Controllers;
 
 [ApiController]
 [Route("api/auth")]
-public class AuthController(IAuthService authService) : ControllerBase
+public class AuthController(ITokenService tokenService) : ControllerBase
 {
-    [HttpPost("register")]
-    public async Task<IActionResult> Register(UserRequestDto userRequestDto)
+    [HttpPost("authorize-firebase-client")]
+    public async Task<IActionResult> FirebaseLogin(string firebaseToken)
     {
-        var userResponseDto = await authService.RegisterAsync(userRequestDto);
-        return Ok(userResponseDto);
+        var tokens = await tokenService.GenerateAccessTokenWithFirebase(firebaseToken);
+        return Ok(tokens);
+    }
+
+    [HttpPost("refresh-token")]
+    public async Task<IActionResult> RefreshToken(string refreshToken)
+    {
+        var tokens = await tokenService.RefreshAccessToken(refreshToken);
+        return Ok(tokens);
     }
 }

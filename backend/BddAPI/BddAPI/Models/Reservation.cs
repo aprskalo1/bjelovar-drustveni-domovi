@@ -7,10 +7,10 @@ public class Reservation
     [Key] public Guid Id { get; init; }
 
     public Guid UserId { get; init; }
-    public User User { get; init; } = null!;
+    public User User { get; init; }
 
     public Guid CommunityCenterId { get; init; }
-    public CommunityCenter CommunityCenter { get; init; } = null!;
+    public CommunityCenter CommunityCenter { get; init; }
 
     [Required] public DateTime ReservationFrom { get; init; }
     [Required] public DateTime ReservationTo { get; init; }
