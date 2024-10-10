@@ -17,8 +17,8 @@ const handleRegister = () => {
       <RouterLink to="/c">Link</RouterLink>
     </div>
     <div class="flex items-center gap-3">
-      <RouterLink to="#register" @click="handleRegister">Registracija</RouterLink>
-      <RouterLink to="#login" @click="handleLogin" class="dsy-btn">
+      <RouterLink to="/registracija" @click="handleRegister">Registracija</RouterLink>
+      <RouterLink to="/prijava" @click="handleLogin" class="dsy-btn">
         Prijava
       </RouterLink>
       <button class="flex items-center">

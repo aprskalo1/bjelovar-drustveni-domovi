@@ -8,8 +8,13 @@ interface Tokens {
   refreshToken: string;
 }
 
-const REST_API_URL = ""; // Todo: import.meta.env.VITE_REST_API_URL;
-const REFRESH_TOKEN_URL = `${REST_API_URL}/auth/refreshToken`;
+const REST_API_URL = "localhost:7283"; // Todo: import.meta.env.VITE_REST_API_URL;
+export const URLS = {
+  REST_API_URL,
+  REFRESH_TOKEN_URL: `${REST_API_URL}/auth/refresh-token`,
+  FIREBASE_LOGIN_URL: `${REST_API_URL}/auth/authorize-firebase-client`,
+}
+
 const AXIOS_CLIENT_OPTIONS: CreateAxiosDefaults = {
   baseURL: REST_API_URL,
   timeout: 300000,
@@ -49,7 +54,7 @@ export const useAuthStore = defineStore("auth", () => {
     options: AXIOS_CLIENT_OPTIONS,
     getCurrentAccessToken: () => accessToken.value,
     getCurrentRefreshToken: () => refreshToken.value,
-    refreshTokenUrl: REFRESH_TOKEN_URL,
+    refreshTokenUrl: URLS.REFRESH_TOKEN_URL,
     logout: onLogout,
     setRefreshedTokens: onLogin,
   });
