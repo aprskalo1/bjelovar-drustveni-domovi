@@ -1,5 +1,10 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import VWave from "v-wave";
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import "./styles/main.css";
+import { createPinia } from "pinia";
 
-createApp(App).mount('#app')
+const pinia = createPinia();
+
+createApp(App).use(pinia).use(router).use(VWave, {}).mount("#app");
