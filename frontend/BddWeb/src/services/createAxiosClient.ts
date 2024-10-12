@@ -119,7 +119,6 @@ export function createAxiosClient({
             };
             setRefreshedTokens(tokens);
             processQueue(null);
-
             return client(originalRequest);
           }, handleError)
           .finally(() => {

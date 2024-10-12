@@ -8,7 +8,7 @@ interface Tokens {
   refreshToken: string;
 }
 
-const REST_API_URL = "localhost:7283"; // Todo: import.meta.env.VITE_REST_API_URL;
+const REST_API_URL = "https://localhost:7283/api"; // Todo: import.meta.env.VITE_REST_API_URL;
 export const URLS = {
   REST_API_URL,
   REFRESH_TOKEN_URL: `${REST_API_URL}/auth/refresh-token`,
@@ -50,14 +50,14 @@ export const useAuthStore = defineStore("auth", () => {
     refreshToken.value = null;
   };
 
-  const axiosClient = createAxiosClient({
+  const axiosClient = ref(createAxiosClient({
     options: AXIOS_CLIENT_OPTIONS,
     getCurrentAccessToken: () => accessToken.value,
     getCurrentRefreshToken: () => refreshToken.value,
     refreshTokenUrl: URLS.REFRESH_TOKEN_URL,
     logout: onLogout,
     setRefreshedTokens: onLogin,
-  });
+  }));
 
   return {
     isLoggedIn,

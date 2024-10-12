@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { getAuth } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebaseui/dist/firebaseui.css";
 import { onMounted } from "vue";
@@ -41,12 +42,21 @@ async function loginToDOTNET(result: any) {
   console.log(result);
   const accessToken = result.credential.accessToken;
   const idToken = result.credential.idToken;
+  const idToken2 = await getAuth().currentUser?.getIdToken();
   console.log(`accessToken: ${accessToken}`);
   console.log(`idToken: ${idToken}`);
+  console.log(`getIdToken: ${idToken2}`);
 
-  const response = await authStore.axiosClient.post(URLS.FIREBASE_LOGIN_URL, {
-    firebaseToken: idToken,
-  });
+  const response = await authStore.axiosClient.post(
+    URLS.FIREBASE_LOGIN_URL,
+    null,
+    {
+      params: {
+        firebaseToken: idToken2,
+      },
+      authorization: false,
+    },
+  );
   console.log(response);
 
   const tokens = response.data;
