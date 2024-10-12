@@ -9,7 +9,7 @@ public class RefreshToken
     public Guid UserId { get; init; }
     public User User { get; init; }
 
-    [Required] [MaxLength(500)] public string Token { get; init; }
-    public DateTime Expires { get; init; }
+    [Required] [MaxLength(500)] public string Token { get; set; }
+    public DateTime Expires { get; set; }
     public DateTime CreatedAt { get; init; } = DateTime.Now;
 }

@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
 using BddAPI.Data;
@@ -40,36 +41,54 @@ public class TokenService(
             throw new UserException("User ID, email or username not found in token");
         }
 
-        var user = await userRepository.GetUserByFirebaseUid(userId);
-        if (user == null)
+        var bddUser = await userRepository.GetUserByFirebaseUid(userId);
+        if (bddUser == null)
         {
-            await userRepository.CreateUserAsync(new User
+            var newBddUser = new User
             {
                 FirebaseUid = userId,
-                Username = username,
                 Email = userEmail,
-            });
-            var userRequestDto = mapper.Map<UserRequestDto>(user);
-            await userService.AssignDefaultRoleAsync(userRequestDto);
+                Username = username
+            };
+            bddUser = await userRepository.CreateUserAsync(newBddUser);
+            var newBddUserReqDto = mapper.Map<UserRequestDto>(newBddUser);
+            await userRepository.SaveChangesAsync();
+
+            await userService.AssignDefaultRoleAsync(newBddUserReqDto);
             await userRepository.SaveChangesAsync();
         }
 
         var accessToken = GenerateAccessToken();
         var refreshToken = GenerateRefreshToken();
-
-        dbContext.RefreshTokens.Add(new RefreshToken
-        {
-            Token = refreshToken,
-            Expires = DateTime.Now.AddDays(7),
-            UserId = user!.Id
-        });
-        await dbContext.SaveChangesAsync();
+        await UpdateRefreshToken(bddUser!.Id, refreshToken);
 
         return new TokensResponse
         {
             AccessToken = accessToken,
             RefreshToken = refreshToken
         };
+    }
+
+    private async Task UpdateRefreshToken(Guid userId, string newRefreshToken)
+    {
+        var existingRefreshToken = await dbContext.RefreshTokens.FirstOrDefaultAsync(rt => rt.UserId == userId);
+
+        if (existingRefreshToken != null)
+        {
+            existingRefreshToken.Token = newRefreshToken;
+            existingRefreshToken.Expires = DateTime.Now.AddDays(7);
+        }
+        else
+        {
+            dbContext.RefreshTokens.Add(new RefreshToken
+            {
+                Token = newRefreshToken,
+                Expires = DateTime.Now.AddDays(7),
+                UserId = userId
+            });
+        }
+
+        await dbContext.SaveChangesAsync();
     }
 
     public async Task<TokensResponse> RefreshAccessToken(string refreshToken)
@@ -100,26 +119,28 @@ public class TokenService(
         var accessToken = new JwtSecurityToken(
             issuer: jwtSettings["Issuer"],
             audience: jwtSettings["Audience"],
-            expires: DateTime.Now.AddMinutes(double.Parse(jwtSettings["AccessTokenExpirationInMinutes"]!)),
+            expires: DateTime.Now.AddMinutes(double.Parse(jwtSettings["ExpirationInMinutes"]!)),
             signingCredentials: credentials
         );
 
         return new JwtSecurityTokenHandler().WriteToken(accessToken);
     }
 
-    private string GenerateRefreshToken()
+    private static string GenerateRefreshToken()
     {
-        var jwtSettings = configuration.GetSection("JWT");
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Secret"]!));
-        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        const int tokenLengthInBytes = 64;
+        var randomBytes = new byte[tokenLengthInBytes];
 
-        var refreshToken = new JwtSecurityToken(
-            issuer: jwtSettings["Issuer"],
-            audience: jwtSettings["Audience"],
-            expires: DateTime.Now.AddDays(7),
-            signingCredentials: credentials
-        );
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(randomBytes);
+        }
 
-        return new JwtSecurityTokenHandler().WriteToken(refreshToken);
+        var refreshToken = Convert.ToBase64String(randomBytes)
+            .Replace("+", "-")
+            .Replace("/", "_")
+            .Replace("=", "");
+
+        return refreshToken;
     }
 }
