@@ -11,7 +11,7 @@ public class BddExceptionFilter : IExceptionFilter
         if (context.Exception is not BddCustomException netLinkCustomException) return;
         context.Result = context.Exception switch
         {
-            UserException => new BadRequestObjectResult(new
+            UserException or ReservationException or CommunityCenterException => new BadRequestObjectResult(new
             {
                 netLinkCustomException.Message
             }),

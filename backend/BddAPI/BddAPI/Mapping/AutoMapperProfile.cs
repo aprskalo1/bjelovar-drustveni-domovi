@@ -14,5 +14,17 @@ public class AutoMapperProfile : Profile
 
         CreateMap<User, UserResponseDto>();
         CreateMap<UserResponseDto, User>();
+
+        CreateMap<Reservation, ReservationRequestDto>();
+        CreateMap<ReservationRequestDto, Reservation>();
+
+        CreateMap<Reservation, ReservationResponseDto>();
+        CreateMap<ReservationResponseDto, Reservation>();
+
+        CreateMap<CommunityCenter, CommunityCenterRequestDto>();
+        CreateMap<CommunityCenterRequestDto, CommunityCenter>();
+
+        CreateMap<CommunityCenter, CommunityCenterResponseDto>();
+        CreateMap<CommunityCenterResponseDto, CommunityCenter>();
     }
 }

@@ -8,6 +8,22 @@ internal class UserException(string message) : BddCustomException(message)
     }
 }
 
+internal class ReservationException(string message) : BddCustomException(message)
+{
+    public override string ToString()
+    {
+        return $"ReservationException: {Message}";
+    }
+}
+
+internal class CommunityCenterException(string message) : BddCustomException(message)
+{
+    public override string ToString()
+    {
+        return $"CommunityCenter: {Message}";
+    }
+}
+
 internal class NotFoundException(string message) : BddCustomException(message)
 {
     public override string ToString()

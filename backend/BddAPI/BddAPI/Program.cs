@@ -86,9 +86,13 @@ FirebaseApp.Create(new AppOptions()
 });
 
 builder.Services.AddSingleton(FirebaseAuth.DefaultInstance);
-builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IReservationsRepository, ReservationsRepository>();
+builder.Services.AddScoped<IReservationsService, ReservationsService>();
+builder.Services.AddScoped<ICommunityCentersRepository, CommunityCentersRepository>();
+builder.Services.AddScoped<ICommunityCentersService, CommunityCentersService>();
 
 builder.Services.AddDbContext<BddDbContext>(options => { options.UseSqlServer("name=ConnectionStrings:DefaultConnection"); });
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
