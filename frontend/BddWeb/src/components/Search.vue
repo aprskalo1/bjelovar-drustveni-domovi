@@ -1,48 +1,24 @@
-<script setup lang="ts">
-/* import { onMounted, onUnmounted, ref } from "vue";
-
-const searchDiv = ref<HTMLElement | null>(null);
-const searchDivHeight = ref(0);
-
-const emit =
-  defineEmits<(event: "update:searchDivHeight", height: number) => void>();
-
-onMounted(() => {
-  const resizeObserver = new ResizeObserver((entries) => {
-    for (let entry of entries) {
-      if (entry.target === searchDiv.value) {
-        searchDivHeight.value = entry.contentRect.height;
-        emit("update:searchDivHeight", searchDivHeight.value);
-      }
-    }
-  });
-  resizeObserver.observe(searchDiv.value!);
-  onUnmounted(() => {
-    resizeObserver.unobserve(searchDiv.value!);
-    resizeObserver.disconnect();
-  });
-}); */
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div
-    class="mx-auto w-1/2 -translate-x-1 -translate-y-[5rem] rounded-3xl bg-base-100 px-6 py-3 shadow-xl"
+    class="relative mx-auto w-full bg-base-100 px-6 py-3 shadow-xl lg:w-1/2 lg:-translate-x-1 lg:-translate-y-[7rem] lg:rounded-3xl"
   >
-    <div class="uppercase">Odaberi željeni period</div>
+    <!-- <div class="uppercase">Odaberi željeni period</div> -->
     <div class="relative flex flex-wrap gap-3">
       <div class="flex-1 rounded-md px-8 py-3 shadow-md">
         <label class="flex items-center">
           <div>Od</div>
-          <input type="date" class="dsy-input w-full" />
+          <input type="date" class="dsy-input ml-2 w-full" />
         </label>
-        <div class="text-neutral-500">Početak rezervacije</div>
+        <div class="text-nowrap text-neutral-500">Početak rezervacije</div>
       </div>
       <div class="flex-1 rounded-md px-8 py-3 shadow-md">
         <label class="flex items-center">
           <div>Do</div>
-          <input type="date" class="dsy-input w-full" />
+          <input type="date" class="dsy-input ml-2 w-full" />
         </label>
-        <div class="text-neutral-500">Kraj rezervacije</div>
+        <div class="text-nowrap text-neutral-500">Kraj rezervacije</div>
       </div>
       <div
         class="absolute-center flex-center rounded-full bg-base-200 p-3 shadow-lg"
