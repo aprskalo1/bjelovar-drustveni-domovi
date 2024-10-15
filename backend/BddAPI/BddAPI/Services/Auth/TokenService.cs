@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
@@ -58,9 +59,9 @@ public class TokenService(
             await userRepository.SaveChangesAsync();
         }
 
-        var accessToken = GenerateAccessToken();
+        var accessToken = await GenerateAccessToken(bddUser);
         var refreshToken = GenerateRefreshToken();
-        await UpdateRefreshToken(bddUser!.Id, refreshToken);
+        await UpdateRefreshToken(bddUser.Id, refreshToken);
 
         return new TokensResponse
         {
@@ -96,12 +97,14 @@ public class TokenService(
         var validRefreshToken = await dbContext.RefreshTokens.FirstOrDefaultAsync(rt => rt.Token == refreshToken) ??
                                 throw new NotFoundException("Refresh token not found");
 
-        if (validRefreshToken.Expires < DateTime.Now)
-        {
-            throw new UnauthorizedException("Refresh token expired");
-        }
+        var bddUser = await userRepository.GetUserByRefreshToken(refreshToken);
+        if (bddUser == null)
+            throw new NotFoundException("User with this refresh token not found");
 
-        var accessToken = GenerateAccessToken();
+        if (validRefreshToken.Expires < DateTime.Now)
+            throw new UnauthorizedException("Refresh token expired");
+
+        var accessToken = await GenerateAccessToken(bddUser);
 
         return new TokensResponse
         {
@@ -110,15 +113,27 @@ public class TokenService(
         };
     }
 
-    private string GenerateAccessToken()
+    private async Task<string> GenerateAccessToken(User bddUser)
     {
         var jwtSettings = configuration.GetSection("JWT");
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Secret"]!));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+        var userRoles = await userRepository.GetUserRoles(bddUser.Id);
+
+        var userClaims = new List<Claim>
+        {
+            new(ClaimTypes.NameIdentifier, bddUser.Id.ToString()),
+            new(ClaimTypes.Name, bddUser.Username),
+            new(ClaimTypes.Email, bddUser.Email)
+        };
+
+        userClaims.AddRange(userRoles.Select(role => new Claim(ClaimTypes.Role, role.Name)));
+
         var accessToken = new JwtSecurityToken(
             issuer: jwtSettings["Issuer"],
             audience: jwtSettings["Audience"],
+            claims: userClaims,
             expires: DateTime.Now.AddMinutes(double.Parse(jwtSettings["ExpirationInMinutes"]!)),
             signingCredentials: credentials
         );
