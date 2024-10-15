@@ -1,6 +1,5 @@
 using BddAPI.DTOs.Request;
 using BddAPI.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BddAPI.Controllers;
@@ -17,7 +16,6 @@ public class CommunityCentersController(ICommunityCentersService communityCenter
     }
 
     [HttpGet("get-by-id")]
-    [Authorize(Roles = "User")]
     public async Task<IActionResult> GetCommunityCenter(Guid id)
     {
         var communityCenter = await communityCentersService.GetCommunityCenterAsync(id);
@@ -25,7 +23,6 @@ public class CommunityCentersController(ICommunityCentersService communityCenter
     }
 
     [HttpGet("get-all")]
-    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetCommunityCenters(int quantity)
     {
         var communityCenters = await communityCentersService.GetCommunityCentersAsync(quantity);
