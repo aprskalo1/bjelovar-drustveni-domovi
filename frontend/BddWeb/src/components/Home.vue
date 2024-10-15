@@ -1,18 +1,30 @@
+<script setup lang="ts">
+import Search from "./Search.vue";
+
+/* const searchDivHeight = ref(0);
+const handleSearchHeightUpdate = (height: number) => {
+  searchDivHeight.value = height;
+}; */
+</script>
+
 <template>
-  <div class="relative">
-    <div class="relative max-h-[65vh] overflow-hidden">
-      <img src="/pictures/drone/DJI_0140.JPG?url" alt="" class="opacity-80" />
+  <div>
+    <div class="relative">
+      <img
+        src="/pictures/landing.webp?url"
+        alt=""
+        class="scale-[2] opacity-75 shadow-xl lg:scale-100"
+      />
       <div
-        class="absolute top-1/2 ml-5 -translate-y-1/2 text-6xl font-extrabold text-white [text-shadow:0_0_3px_black]"
+        class="absolute top-6 ml-8 text-white [text-shadow:0_0_3px_black] lg:top-32"
       >
-        Rezerviraj društveni dom
+        <div class="pb-5 text-4xl font-extrabold lg:text-6xl">
+          Rezerviraj društveni dom
+        </div>
+        <div class="text-xl">Mjesta za događaje koje pamtiš</div>
       </div>
     </div>
-    <div
-      class="absolute left-10 right-10 h-[20vh] -translate-y-1/2 rounded-3xl bg-base-100 shadow-xl"
-    >
-      sadrzaj
-    </div>
-    <div class="mt-[15vh] bg-red-500 p-8">sadrzaj</div>
+    <Search />
+    <div class="bg-red-500 p-8">ahahhaha</div>
   </div>
 </template>

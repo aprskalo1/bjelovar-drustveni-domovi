@@ -68,7 +68,7 @@ async function loginToDOTNET(result: any) {
 
 <template>
   <div id="login" class="mt-20 grid items-center overflow-auto">
-    <div class="border-y-2 border-base-300 py-5 backdrop-blur-sm">
+    <div class="border-base-300 py-5 backdrop-blur-sm">
       <div id="firebaseui-auth-container" class="pt-5"></div>
     </div>
   </div>
