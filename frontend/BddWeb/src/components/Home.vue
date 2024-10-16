@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import Search from "./Search.vue";
+
+const { t } = useI18n();
 
 const landingImg = ref<HTMLElement | null>(null);
 const landingImgHeight = ref(0);
@@ -38,9 +41,9 @@ onMounted(() => {
         class="absolute top-24 w-full bg-white/50 px-8 py-6 text-center text-white backdrop-blur-sm [text-shadow:0_0_3px_black] lg:top-32 lg:bg-transparent lg:text-left lg:backdrop-blur-none"
       >
         <div class="pb-5 text-4xl font-extrabold lg:text-6xl">
-          Rezerviraj društveni dom
+          {{ t("home.title") }}
         </div>
-        <div class="text-xl">Mjesta za događaje koje pamtiš</div>
+        <div class="text-xl">{{ t("home.subtitle") }}</div>
       </div>
     </div>
     <Search />

@@ -1,0 +1,21 @@
+{
+  "appName": "Bjelovar Community Homes",
+  "header": {
+    "contact": "Contact",
+    "aboutUs": "About Us",
+    "login": "Sign in",
+    "greeting": "Hello"
+  },
+  "home": {
+    "title": "Book a community home",
+    "subtitle": "Places for events you remember",
+    "searchBox": {
+      "from": "From",
+      "to": "To",
+      "fromDescription": "Start of reservation",
+      "toDescription": "End of reservation",
+      "showAll": "Show All",
+      "search": "Search"
+    }
+  }
+}

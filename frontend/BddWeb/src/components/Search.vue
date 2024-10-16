@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+</script>
 
 <template>
   <div
@@ -8,17 +12,21 @@
     <div class="relative flex flex-wrap gap-3">
       <div class="flex-1 rounded-md px-8 py-3 shadow-md">
         <label class="flex items-center">
-          <div>Od</div>
+          <div>{{ t("home.searchBox.from") }}</div>
           <input type="date" class="dsy-input ml-2 w-full" />
         </label>
-        <div class="text-nowrap text-neutral-500">Početak rezervacije</div>
+        <div class="text-nowrap text-neutral-500">
+          {{ t("home.searchBox.fromDescription") }}
+        </div>
       </div>
       <div class="flex-1 rounded-md px-8 py-3 shadow-md">
         <label class="flex items-center">
-          <div>Do</div>
+          <div>{{ t("home.searchBox.to") }}</div>
           <input type="date" class="dsy-input ml-2 w-full" />
         </label>
-        <div class="text-nowrap text-neutral-500">Kraj rezervacije</div>
+        <div class="text-nowrap text-neutral-500">
+          {{ t("home.searchBox.toDescription") }}
+        </div>
       </div>
       <div
         class="absolute-center flex-center rounded-full bg-base-200 p-3 shadow-lg"
@@ -27,7 +35,7 @@
       </div>
     </div>
     <div class="flex items-center py-2">
-      Prikaži sve
+      {{ t("home.searchBox.showAll") }}
       <span class="material-symbols-outlined"> arrow_drop_down </span>
     </div>
     <div
@@ -36,7 +44,7 @@
       <button
         class="bg-skyBlue hover:bg-skyBlue/50 dsy-btn w-full text-xl uppercase"
       >
-        Traži
+        {{ t("home.searchBox.search") }}
         <span class="material-symbols-outlined"> arrow_downward </span>
       </button>
     </div>

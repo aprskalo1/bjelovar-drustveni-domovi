@@ -4,6 +4,7 @@ import { useRoute } from "vue-router";
 import Links from "./Links.vue";
 import Login from "./Login.vue";
 import Title from "./Title.vue";
+import Language from "./Language.vue";
 
 const route = useRoute();
 const isLandingPage = computed(() => route.path === "/");
@@ -23,6 +24,7 @@ const isLandingPage = computed(() => route.path === "/");
     </div>
     <div class="hidden items-center justify-center gap-3 lg:flex">
       <Login />
+      <Language />
     </div>
     <div class="dsy-drawer dsy-drawer-end w-auto lg:hidden">
       <input id="main-drawer" type="checkbox" class="dsy-drawer-toggle" />
