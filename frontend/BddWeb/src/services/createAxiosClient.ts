@@ -1,3 +1,8 @@
+/*
+https://dev.to/mihaiandrei97/jwt-authentication-using-prisma-and-express-37nk
+https://dev.to/mihaiandrei97/jwt-authentication-using-axios-interceptors-55be
+ */
+
 import axios, { CreateAxiosDefaults } from "axios";
 
 declare module "axios" {

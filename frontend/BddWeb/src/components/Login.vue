@@ -40,12 +40,12 @@ onMounted(() => {
 
 async function loginToDOTNET(result: any) {
   console.log(result);
-  const accessToken = result.credential.accessToken;
-  const idToken = result.credential.idToken;
+  //const accessToken = result.credential.accessToken;
+  //const idToken = result.credential.idToken;
   const idToken2 = await getAuth().currentUser?.getIdToken();
-  console.log(`accessToken: ${accessToken}`);
-  console.log(`idToken: ${idToken}`);
-  console.log(`getIdToken: ${idToken2}`);
+  //console.log(`accessToken: ${accessToken}`);
+  //console.log(`idToken: ${idToken}`);
+  //console.log(`getIdToken: ${idToken2}`);
 
   const response = await authStore.axiosClient.post(
     URLS.FIREBASE_LOGIN_URL,
@@ -57,11 +57,10 @@ async function loginToDOTNET(result: any) {
       authorization: false,
     },
   );
-  console.log(response);
-
-  const tokens = response.data;
-  console.log(tokens);
-
+  authStore.onLogin({
+    accessToken: response.data.accessToken,
+    refreshToken: response.data.refreshToken,
+  });
   router.push("/");
 }
 </script>

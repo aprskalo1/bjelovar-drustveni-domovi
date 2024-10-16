@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import Search from "./Search.vue";
-
-import { onMounted, onUnmounted, ref } from "vue";
 
 const landingImg = ref<HTMLElement | null>(null);
 const landingImgHeight = ref(0);
 
 onMounted(() => {
+  if (!landingImg.value) return;
   const resizeObserver = new ResizeObserver((entries) => {
     for (let entry of entries) {
       if (entry.target === landingImg.value) {
@@ -15,7 +15,7 @@ onMounted(() => {
     }
   });
   resizeObserver.observe(landingImg.value!);
-  onUnmounted(() => {
+  onBeforeUnmount(() => {
     resizeObserver.unobserve(landingImg.value!);
     resizeObserver.disconnect();
   });

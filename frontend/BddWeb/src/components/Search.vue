@@ -33,7 +33,9 @@
     <div
       class="absolute bottom-0 right-6 w-1/3 translate-y-1/2 text-xl uppercase"
     >
-      <button class="dsy-btn w-full text-xl uppercase">
+      <button
+        class="bg-skyBlue hover:bg-skyBlue/50 dsy-btn w-full text-xl uppercase"
+      >
         Traži
         <span class="material-symbols-outlined"> arrow_downward </span>
       </button>
