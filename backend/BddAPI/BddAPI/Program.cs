@@ -93,6 +93,7 @@ builder.Services.AddScoped<IReservationsRepository, ReservationsRepository>();
 builder.Services.AddScoped<IReservationsService, ReservationsService>();
 builder.Services.AddScoped<ICommunityCentersRepository, CommunityCentersRepository>();
 builder.Services.AddScoped<ICommunityCentersService, CommunityCentersService>();
+builder.Services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
 
 builder.Services.AddDbContext<BddDbContext>(options => { options.UseSqlServer("name=ConnectionStrings:DefaultConnection"); });
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
@@ -107,6 +108,10 @@ if (app.Environment.IsDevelopment())
     app.UseCors("AllowAll");
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using var scope = app.Services.CreateScope();
+    var seeder = scope.ServiceProvider.GetRequiredService<IDatabaseSeeder>();
+    await seeder.SeedAsync();
 }
 
 app.UseHttpsRedirection();
