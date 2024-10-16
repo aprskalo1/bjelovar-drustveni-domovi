@@ -4,7 +4,9 @@
     "contact": "Contact",
     "aboutUs": "About Us",
     "login": "Sign in",
-    "greeting": "Hello"
+    "greeting": "Hello",
+    "userAccount": "User account",
+    "logout": "Sing out"
   },
   "home": {
     "title": "Book a community home",

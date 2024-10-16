@@ -12,6 +12,8 @@ declare module "vue-i18n" {
       aboutUs: string;
       login: string;
       greeting: string;
+      userAccount: string;
+      logout: string;
     };
     home: {
       title: string;

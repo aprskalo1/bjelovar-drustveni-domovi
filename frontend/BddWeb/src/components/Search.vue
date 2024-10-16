@@ -34,10 +34,10 @@ const { t } = useI18n();
         <span class="material-symbols-outlined"> swap_horiz </span>
       </div>
     </div>
-    <div class="flex items-center py-2">
+    <button class="flex items-center py-2">
       {{ t("home.searchBox.showAll") }}
       <span class="material-symbols-outlined"> arrow_drop_down </span>
-    </div>
+    </button>
     <div
       class="absolute bottom-0 right-6 w-1/3 translate-y-1/2 text-xl uppercase"
     >
@@ -45,7 +45,7 @@ const { t } = useI18n();
         class="bg-skyBlue hover:bg-skyBlue/50 dsy-btn w-full text-xl uppercase"
       >
         {{ t("home.searchBox.search") }}
-        <span class="material-symbols-outlined"> arrow_downward </span>
+        <span class="material-symbols-outlined"> search </span>
       </button>
     </div>
   </div>

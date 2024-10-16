@@ -2,6 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import Search from "./Search.vue";
+import Results from "./Results.vue";
 
 const { t } = useI18n();
 
@@ -28,7 +29,7 @@ onMounted(() => {
 <template>
   <div>
     <div
-      class="relative overflow-hidden lg:!h-auto"
+      class="relative lg:!h-auto"
       :style="{ height: landingImgHeight + 'px' }"
     >
       <img
@@ -47,7 +48,7 @@ onMounted(() => {
       </div>
     </div>
     <Search />
-    <div class="bg-red-500 p-8">ahahhaha</div>
+    <Results />
   </div>
 </template>
 

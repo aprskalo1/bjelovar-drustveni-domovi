@@ -4,7 +4,9 @@
     "contact": "Kontakt",
     "aboutUs": "O nama",
     "login": "Prijava",
-    "greeting": "Pozdrav"
+    "greeting": "Pozdrav",
+    "userAccount": "Korisnički račun",
+    "logout": "Odjava"
   },
   "home": {
     "title": "Rezerviraj društveni dom",
