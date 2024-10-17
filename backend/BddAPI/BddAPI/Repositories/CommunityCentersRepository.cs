@@ -32,6 +32,11 @@ public class CommunityCentersRepository(BddDbContext dbContext, IReservationsRep
 
     public async Task<IEnumerable<CommunityCenter?>> GetCommunityCentersAsync(int quantity)
     {
+        if (quantity == 0)
+        {
+            return await dbContext.CommunityCenters.ToListAsync();
+        }
+
         return await dbContext.CommunityCenters.Take(quantity).ToListAsync();
     }
 

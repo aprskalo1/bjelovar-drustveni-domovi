@@ -32,6 +32,11 @@ public class ReservationsRepository(BddDbContext dbContext) : IReservationsRepos
 
     public async Task<List<Reservation>?> GetReservationsAsync(int quantity)
     {
+        if (quantity == 0)
+        {
+            return await dbContext.Reservations.ToListAsync();
+        }
+
         return await dbContext.Reservations.Take(quantity).ToListAsync();
     }
 
