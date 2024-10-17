@@ -27,7 +27,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="!p-0">
     <div
       class="relative lg:!h-auto"
       :style="{ height: landingImgHeight + 'px' }"
@@ -39,7 +39,7 @@ onMounted(() => {
         ref="landingImg"
       />
       <div
-        class="absolute top-24 w-full bg-white/50 px-8 py-6 text-center text-white backdrop-blur-sm [text-shadow:0_0_3px_black] lg:top-32 lg:bg-transparent lg:text-left lg:backdrop-blur-none"
+        class="absolute top-24 w-full bg-white/50 px-8 py-6 text-center text-white backdrop-blur-sm [text-shadow:0_0_3px_black] lg:top-28 lg:bg-transparent lg:text-left lg:backdrop-blur-none"
       >
         <div class="pb-5 text-4xl font-extrabold lg:text-6xl">
           {{ t("home.title") }}

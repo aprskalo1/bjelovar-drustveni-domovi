@@ -6,7 +6,9 @@
     "login": "Prijava",
     "greeting": "Pozdrav",
     "userAccount": "Korisnički račun",
-    "logout": "Odjava"
+    "logout": "Odjava",
+    "lightMode": "Svijetli prikaz",
+    "darkMode": "Tamni prikaz"
   },
   "home": {
     "title": "Rezerviraj društveni dom",

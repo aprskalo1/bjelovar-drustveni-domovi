@@ -14,6 +14,8 @@ declare module "vue-i18n" {
       greeting: string;
       userAccount: string;
       logout: string;
+      lightMode: string;
+      darkMode: string;
     };
     home: {
       title: string;

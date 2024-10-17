@@ -1,4 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+// aktivni domovi
+// moje rezervacije
+// maps
+// 
+</script>
 
 <template>
   <div>

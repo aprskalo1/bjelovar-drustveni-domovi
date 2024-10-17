@@ -6,6 +6,10 @@ const { t } = useI18n();
 
 const authStore = useAuthStore();
 
+const handleClick = () => {
+  (document.activeElement as any).blur(); // Todo?
+};
+
 const handleLogout = () => {
   authStore.onLogout();
 };
@@ -23,13 +27,13 @@ const handleLogout = () => {
       tabindex="0"
       class="dsy-menu dsy-dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 text-base-content shadow"
     >
-      <li>
-        <button>
+      <li @click="handleClick">
+        <RouterLink to="/korisnik">
           {{ t("header.userAccount") }}
           <span class="material-symbols-outlined ml-auto"> person </span>
-        </button>
+        </RouterLink>
       </li>
-      <li>
+      <li @click="handleClick">
         <button @click="handleLogout">
           {{ t("header.logout") }}
           <span class="material-symbols-outlined ml-auto"> logout </span>

@@ -6,7 +6,9 @@
     "login": "Sign in",
     "greeting": "Hello",
     "userAccount": "User account",
-    "logout": "Sing out"
+    "logout": "Sing out",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
   },
   "home": {
     "title": "Book a community home",

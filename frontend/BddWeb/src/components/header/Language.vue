@@ -17,7 +17,7 @@ document.title = t("appName");
     v-model="$i18n.locale"
     @change="changeLocale(($event!.target as HTMLSelectElement).value)"
   >
-    <option value="hr">HR</option>
-    <option value="en">EN</option>
+    <option value="hr" class="bg-base-100">HR</option>
+    <option value="en" class="bg-base-100">EN</option>
   </select>
 </template>
