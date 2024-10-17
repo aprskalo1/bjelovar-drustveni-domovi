@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useCentersStore } from "@/stores/centers";
+import { formatDate } from "@/utils/format";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import Results from "./Results.vue";
@@ -6,8 +8,14 @@ import Search from "./Search.vue";
 
 const { t } = useI18n();
 
+const centersStore = useCentersStore();
+
+const resultsComponent = ref<InstanceType<typeof Results> | null>(null);
 const landingImg = ref<HTMLElement | null>(null);
 const landingImgHeight = ref(0);
+
+const centers = ref<Center[] | undefined>(undefined);
+const resultsScrolledIn = ref(false);
 
 onMounted(() => {
   if (!landingImg.value) return;
@@ -24,6 +32,18 @@ onMounted(() => {
     resizeObserver.disconnect();
   });
 });
+
+const handleSearch = async (startDate?: Date, endDate?: Date) => {
+  centers.value = await centersStore.getCenters(
+    formatDate(startDate),
+    formatDate(endDate),
+  );
+  console.log(centers.value);
+  resultsComponent.value?.$el.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+};
 </script>
 
 <template>
@@ -49,8 +69,12 @@ onMounted(() => {
         <div class="text-lg italic">{{ t("home.subtitle") }}</div>
       </div>
     </div>
-    <Search />
-    <Results />
+    <Search :isCollapsed="resultsScrolledIn" @change="handleSearch" />
+    <Results
+      :centers="centers"
+      ref="resultsComponent"
+      @scrolled-in="(scrolledIn) => (resultsScrolledIn = scrolledIn)"
+    />
   </div>
 </template>
 

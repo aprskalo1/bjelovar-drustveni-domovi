@@ -15,6 +15,15 @@ export const URLS = {
   REST_API_URL,
   REFRESH_TOKEN_URL: `${REST_API_URL}/auth/refresh-token`,
   FIREBASE_LOGIN_URL: `${REST_API_URL}/auth/authorize-firebase-client`,
+  CREATE_CENTER: `${REST_API_URL}/community-centers/create`,
+  GET_CENTERS: `${REST_API_URL}/community-centers/get-all`,
+  GET_CENTERS_BY_AVAILABILITY: `${REST_API_URL}/community-centers/get-by-availability`,
+  UPDATE_CENTER: `${REST_API_URL}/community-centers/update`,
+  DELETE_CENTER: `${REST_API_URL}/community-centers/delete`,
+  CREATE_RESERVATION: `${REST_API_URL}/reservations/create`,
+  GET_RESERVATIONS: `${REST_API_URL}/reservations/get-all`,
+  UPDATE_RESERVATION: `${REST_API_URL}/reservations/update`,
+  DELETE_RESERVATION: `${REST_API_URL}/reservations/delete`,
 };
 
 const AXIOS_CLIENT_OPTIONS: CreateAxiosDefaults = {

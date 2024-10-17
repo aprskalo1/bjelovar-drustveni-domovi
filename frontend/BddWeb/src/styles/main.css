@@ -19,10 +19,13 @@
   .absolute-center {
     @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
   }
+  .separator {
+    @apply h-1 w-full;
+  }
 }
 
 html {
-  background-image: url(/pictures/drone/DJI_0138.JPG);
+  background-image: url(/pictures/html-bg.webp);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

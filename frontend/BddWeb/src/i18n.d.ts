@@ -27,7 +27,8 @@ declare module "vue-i18n" {
         toDescription: string;
         showAll: string;
         search: string;
-      }
+      },
+      reserve: string;
     }
   }
 
