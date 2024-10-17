@@ -6,7 +6,7 @@ const { t } = useI18n();
 
 <template>
   <div
-    class="relative mx-auto w-full bg-base-100 px-6 py-3 shadow-xl lg:w-1/2 lg:-translate-x-1 lg:-translate-y-[7rem] lg:rounded-3xl"
+    class="lg:sticky lg:bottom-40 lg:top-52 lg:opacity-95 mx-auto w-full bg-base-100 px-6 py-3 shadow-xl lg:w-1/2 lg:-translate-x-1 lg:-translate-y-[7rem] lg:rounded-3xl"
   >
     <!-- <div class="uppercase">Odaberi željeni period</div> -->
     <div class="relative flex flex-wrap gap-3">

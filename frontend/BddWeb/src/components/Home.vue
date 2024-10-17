@@ -40,12 +40,12 @@ onMounted(() => {
         ref="landingImg"
       />
       <div
-        class="absolute top-24 w-full bg-white/50 px-8 py-6 text-center text-white backdrop-blur-sm [text-shadow:0_0_3px_black] lg:top-28 lg:bg-transparent lg:text-left lg:backdrop-blur-none"
+        class="absolute top-16 w-full bg-white/50 px-8 py-6 text-center text-white backdrop-blur-sm [text-shadow:0_0_3px_black] lg:top-24 lg:bg-transparent lg:text-left lg:backdrop-blur-none"
       >
         <div class="pb-5 text-4xl font-extrabold lg:text-6xl">
           {{ t("home.title") }}
         </div>
-        <div class="text-xl">{{ t("home.subtitle") }}</div>
+        <div class="text-lg italic">{{ t("home.subtitle") }}</div>
       </div>
     </div>
     <Search />
