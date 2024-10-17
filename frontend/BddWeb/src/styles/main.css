@@ -21,6 +21,15 @@
   }
 }
 
+html {
+  background-image: url(/pictures/drone/DJI_0138.JPG);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: oklch(var(--b3)) !important;
+  background-blend-mode: overlay;
+}
+
 * {
   transition: background-color 0.2s;
 }

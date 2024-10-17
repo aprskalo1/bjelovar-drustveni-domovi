@@ -2,6 +2,10 @@
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "../../stores/auth";
 
+defineProps<{
+  inDrawer?: boolean;
+}>();
+
 const { t } = useI18n();
 
 const authStore = useAuthStore();
@@ -20,7 +24,7 @@ const handleLogout = () => {
     v-if="authStore.isLoggedIn"
     class="dsy-dropdown dsy-dropdown-end dsy-dropdown-hover"
   >
-    <button class="dsy-btn m-1">
+    <button class="dsy-btn m-1" :class="{ 'bg-base-100': inDrawer }">
       {{ t("header.greeting") }}, {{ authStore.userInfo?.displayName }}
     </button>
     <ul
@@ -41,7 +45,12 @@ const handleLogout = () => {
       </li>
     </ul>
   </div>
-  <RouterLink v-else to="/prijava" class="dsy-btn">
+  <RouterLink
+    v-else
+    to="/prijava"
+    class="dsy-btn"
+    :class="{ 'bg-base-100': inDrawer }"
+  >
     {{ t("header.login") }}
   </RouterLink>
 </template>

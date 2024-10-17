@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import Search from "./Search.vue";
 import Results from "./Results.vue";
+import Search from "./Search.vue";
 
 const { t } = useI18n();
 
@@ -31,6 +31,7 @@ onMounted(() => {
     <div
       class="relative lg:!h-auto"
       :style="{ height: landingImgHeight + 'px' }"
+      :class="{ 'aspect-video': !landingImgHeight }"
     >
       <img
         src="/pictures/landing.webp?url"

@@ -13,7 +13,7 @@ document.title = t("appName");
 
 <template>
   <select
-    class="dsy-select bg-transparent text-xl *:text-base-content"
+    class="dsy-select hover:bg-base-content/20 bg-transparent text-xl *:text-base-content"
     v-model="$i18n.locale"
     @change="changeLocale(($event!.target as HTMLSelectElement).value)"
   >

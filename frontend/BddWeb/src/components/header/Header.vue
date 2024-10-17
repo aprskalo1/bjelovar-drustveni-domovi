@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
+import Drawer from "./Drawer.vue";
 import Language from "./Language.vue";
 import Links from "./Links.vue";
 import Login from "./Login.vue";
@@ -35,7 +36,10 @@ onMounted(() => {
     >
       <Title />
       <div
-        class="hidden justify-center gap-6 border-l border-base-100 pl-6 lg:flex"
+        class="hidden justify-center gap-6 border-l border-base-content pl-6 lg:flex"
+        :class="{
+          '!border-white': isLandingPage && !isSticky,
+        }"
       >
         <Links />
       </div>
@@ -44,32 +48,7 @@ onMounted(() => {
         <Theme />
         <Language />
       </div>
-      <div class="dsy-drawer dsy-drawer-end ml-auto w-auto lg:hidden">
-        <input id="main-drawer" type="checkbox" class="dsy-drawer-toggle" />
-        <div class="dsy-drawer-content">
-          <label for="main-drawer">
-            <span class="material-symbols-outlined lg:hidden"> menu </span>
-          </label>
-        </div>
-        <div class="dsy-drawer-side">
-          <label
-            for="main-drawer"
-            aria-label="close sidebar"
-            class="dsy-drawer-overlay"
-          ></label>
-          <ul
-            class="dsy-menu flex min-h-full w-80 items-center bg-base-200 p-4 text-base-content"
-          >
-            <Title class="mb-6" />
-            <div class="flex items-center justify-center gap-3">
-              <Login />
-            </div>
-            <div class="flex flex-col gap-3 text-xl">
-              <Links />
-            </div>
-          </ul>
-        </div>
-      </div>
+      <Drawer />
     </div>
   </div>
 </template>
