@@ -10,7 +10,7 @@ public class CommunityCenterRequestDto
     [Required] [MaxLength(450)] public string Description { get; init; }
     [Required] public int Capacity { get; init; }
     [Required] public double Price { get; init; }
-    [Required] public string PictureUrl { get; init; }
+    public string PictureUrl { get; init; }
     [Required] public double Latitude { get; init; }
     [Required] public double Longitude { get; init; }
 }
