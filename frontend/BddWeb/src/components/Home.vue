@@ -34,6 +34,7 @@ onMounted(() => {
       :class="{ 'aspect-video': !landingImgHeight }"
     >
       <img
+        id="landing-img"
         src="/pictures/landing.webp?url"
         alt=""
         class="landing-img opacity-75 shadow-xl"

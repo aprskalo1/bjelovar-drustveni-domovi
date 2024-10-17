@@ -1,19 +1,32 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+
+const startDate = ref("");
+const endDate = ref("");
+
+const search = () => {
+  console.log("searching...");
+  
+};
 </script>
 
 <template>
   <div
-    class="lg:sticky lg:bottom-40 lg:top-52 lg:opacity-95 mx-auto w-full bg-base-100 px-6 py-3 shadow-xl lg:w-1/2 lg:-translate-x-1 lg:-translate-y-[7rem] lg:rounded-3xl"
+    class="mx-auto w-full bg-base-100 px-6 py-3 shadow-xl lg:sticky lg:bottom-40 lg:top-52 lg:w-1/2 lg:-translate-x-1 lg:-translate-y-[7rem] lg:rounded-3xl lg:opacity-95"
   >
     <!-- <div class="uppercase">Odaberi željeni period</div> -->
     <div class="relative flex flex-wrap gap-3">
       <div class="flex-1 rounded-md px-8 py-3 shadow-md">
         <label class="flex items-center">
           <div>{{ t("home.searchBox.from") }}</div>
-          <input type="date" class="dsy-input ml-2 w-full" />
+          <input
+            type="date"
+            class="dsy-input ml-2 w-full"
+            v-model="startDate"
+          />
         </label>
         <div class="text-nowrap text-neutral-500">
           {{ t("home.searchBox.fromDescription") }}
@@ -22,7 +35,7 @@ const { t } = useI18n();
       <div class="flex-1 rounded-md px-8 py-3 shadow-md">
         <label class="flex items-center">
           <div>{{ t("home.searchBox.to") }}</div>
-          <input type="date" class="dsy-input ml-2 w-full" />
+          <input type="date" class="dsy-input ml-2 w-full" v-model="endDate" />
         </label>
         <div class="text-nowrap text-neutral-500">
           {{ t("home.searchBox.toDescription") }}
@@ -34,7 +47,7 @@ const { t } = useI18n();
         <span class="material-symbols-outlined"> swap_horiz </span>
       </div>
     </div>
-    <button class="flex items-center py-2">
+    <button class="flex items-center py-2" @click="search">
       {{ t("home.searchBox.showAll") }}
       <span class="material-symbols-outlined"> arrow_drop_down </span>
     </button>
@@ -43,6 +56,7 @@ const { t } = useI18n();
     >
       <button
         class="bg-skyBlue hover:bg-skyBlue/50 dsy-btn w-full text-xl uppercase"
+        @click="search"
       >
         {{ t("home.searchBox.search") }}
         <span class="material-symbols-outlined"> search </span>
