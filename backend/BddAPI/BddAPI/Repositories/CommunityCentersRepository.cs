@@ -16,7 +16,8 @@ public interface ICommunityCentersRepository
     Task SaveChangesAsync();
 }
 
-public class CommunityCentersRepository(BddDbContext dbContext, IReservationsRepository reservationsRepository) : ICommunityCentersRepository
+public class CommunityCentersRepository(BddDbContext dbContext, IReservationsRepository reservationsRepository)
+    : ICommunityCentersRepository
 {
     public async Task<CommunityCenter> CreateCommunityCenterAsync(CommunityCenter communityCenter)
     {

@@ -13,6 +13,7 @@ public interface IReservationsService
     Task<ReservationResponseDto> CreateReservationAsync(ReservationRequestDto reservationRequestDto);
     Task<ReservationResponseDto> GetReservationAsync(Guid reservationId);
     Task<IEnumerable<ReservationResponseDto>> GetReservationsAsync(int quantity);
+    Task<IEnumerable<ReservationResponseDto>> GetUserReservationsAsync(Guid userId);
     Task<IEnumerable<ReservationResponseDto>> GetReservationsByDateRangeAsync(DateTime startDate, DateTime endDate);
     Task<ReservationResponseDto> UpdateReservationAsync(ReservationRequestDto reservationRequestDto, Guid id);
     Task DeleteReservationAsync(Guid reservationId);
@@ -52,6 +53,18 @@ public class ReservationsService(IReservationsRepository reservationsRepository,
         }
 
         return mapper.Map<IEnumerable<ReservationResponseDto>>(reservations);
+    }
+
+    public async Task<IEnumerable<ReservationResponseDto>> GetUserReservationsAsync(Guid userId)
+    {
+        var userReservations = await reservationsRepository.GetUserReservationsAsync(userId);
+        
+        if (userReservations.IsNullOrEmpty())
+        {
+            throw new NotFoundException("No reservations found for this user");
+        }
+        
+        return mapper.Map<IEnumerable<ReservationResponseDto>>(userReservations);
     }
 
     public async Task<IEnumerable<ReservationResponseDto>> GetReservationsByDateRangeAsync(DateTime startDate, DateTime endDate)

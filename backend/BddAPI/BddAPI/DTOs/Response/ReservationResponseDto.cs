@@ -15,4 +15,6 @@ public class ReservationResponseDto
     public int? ExpectedNumberOfPeople { get; set; }
 
     public string? AdditionalNotes { get; set; }
+    
+    public CommunityCenterResponseDto CommunityCenter { get; set; }
 }

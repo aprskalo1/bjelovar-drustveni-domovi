@@ -29,6 +29,13 @@ public class ReservationsController(IReservationsService reservationService) : C
         return Ok(reservations);
     }
 
+    [HttpGet("get-by-user")]
+    public async Task<IActionResult> GetUserReservations(Guid userId)
+    {
+        var reservations = await reservationService.GetUserReservationsAsync(userId);
+        return Ok(reservations);
+    }
+
     [HttpGet("get-by-date-range")]
     public async Task<IActionResult> GetReservationsByDateRange(DateTime startDate, DateTime endDate)
     {

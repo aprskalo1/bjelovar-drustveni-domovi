@@ -10,6 +10,7 @@ public interface IReservationsRepository
     Task<Reservation> CreateReservationAsync(Reservation reservation);
     Task<Reservation?> GetReservationAsync(Guid id);
     Task<List<Reservation>?> GetReservationsAsync(int quantity);
+    Task<List<Reservation>?> GetUserReservationsAsync(Guid userId);
     Task<List<Reservation>?> GetReservationsByDateRangeAsync(DateTime startDate, DateTime endDate);
     Task<Reservation> UpdateReservationAsync(Reservation reservation);
     Task DeleteReservationAsync(Guid id);
@@ -34,9 +35,16 @@ public class ReservationsRepository(BddDbContext dbContext) : IReservationsRepos
         return await dbContext.Reservations.Take(quantity).ToListAsync();
     }
 
+    public async Task<List<Reservation>?> GetUserReservationsAsync(Guid userId)
+    {
+        return await dbContext.Reservations.Include(r => r.CommunityCenter).Where(r => r.UserId == userId)
+            .ToListAsync();
+    }
+
     public async Task<List<Reservation>?> GetReservationsByDateRangeAsync(DateTime startDate, DateTime endDate)
     {
-        return await dbContext.Reservations.Where(r => r!.ReservationFrom >= startDate && r.ReservationTo <= endDate).ToListAsync();
+        return await dbContext.Reservations.Where(r => r.ReservationFrom >= startDate && r.ReservationTo <= endDate)
+            .ToListAsync();
     }
 
     public async Task<Reservation> UpdateReservationAsync(Reservation reservation)
